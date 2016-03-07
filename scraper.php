@@ -1,9 +1,13 @@
 <?php
-require 'scraperwiki.php';
+require 'vendor/autoload.php';
 ######################################
 # NCAA Women's Rankings
 ######################################
-require  'scraperwiki/simple_html_dom.php';
+require  'vendor/openaustralia/scraperwiki/scraperwiki.php';
+require  'vendor/openaustralia/scraperwiki/scraperwiki/simple_html_dom.php';
+
+
+
 $html = scraperwiki::scrape("http://espn.go.com/womens-college-basketball/rankings");
 $dom = new simple_html_dom();
 $dom->load($html);
@@ -20,5 +24,5 @@ foreach($dom->find('table[class=tablehead] tr[class!=colhead]') as $data) {
         $current = "coach";
     }
 }
-scraperwiki::sqlitecommit();
+//scraperwiki::sqlitecommit();
 ?>
